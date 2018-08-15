@@ -27,7 +27,7 @@ Once the site is up, you are ready to start working:
 * Dev: http://dev-[SITE].pantheonsite.io
 * User: admin/admin (local)
 
-You can run [fin init](docs/commands/INIT.md) any time you want to reset or guarantee that your local environment is in a safe one-to-one state with your upstream environment. 
+You typically only run [fin init](docs/commands/INIT.md) on your first-time setup, but can use it any time you want to reset or guarantee that your local environment is in a safe one-to-one state with your upstream environment. 
 
 Here are some other helpful ```fin``` commands that you will likely use in your day-to-day work:
 
@@ -38,7 +38,6 @@ Here are some other helpful ```fin``` commands that you will likely use in your 
 See (working with Docksal)[docs/local/DOCKSAL.md] for additional Docksal commands and tips. 
 
 See [troubleshooting Docksal](docs/local/TROUBLESHOOT.md) if things go bad.
-
 
 
 ## Recommended workflow
@@ -63,12 +62,37 @@ If you see errors or merge conflicts after running [fin sync](docs/commands/SYNC
 
 ## Submit a Github pull request
 
-Each time you push your feature branch, it triggers a Circle CI build to run tests against the development server. You can continue to push to your branch until your work is complete and your site is passing its automated tests. Once your feature branch looks good and is passing its Circle CI tests, submit a Github pull request against your branch. A project maintainer will review the changes and merge into master.
+When your work is ready and has passed any necessary QA. submit a Github pull request against your branch. A project maintainer will review the changes and merge into master.
 
-*Note: Advanced or otherwise approved users can submit and merge their own PRs, and/or merge and push a feature branch directly into master without a formal pull request. Ask if you have questions, and err on the side of caution.*
+**Important:** Any time a Github push occurs to the ```master``` branch (via a git push or a pull request), the code will be AUTOMATICALLY deployed to Cloudways. Once it is on Cloudways you will need to complete the additional steps below depending on the nature of your work. 
 
+*Note: Advanced or otherwise approved users can submit and merge their own PRs, and/or merge and push a feature branch directly into master without a formal pull request. Ask if you have questions, err on the side of caution.*
 
-## Be a good citizen
+## Post push 
+
+After you push to ```master``` branch and your code is on Cloudways you will need to do several additional steps:
+
+**Composer install**
+
+If your changes included module updates, additions, or removals you will need to manually run ```composer install``` on the Cloudways server via SSH:
+
+```ssh stemtc@178.128.150.228```
+
+```composer install```
+
+**Config import**
+
+If your changes require a config import:
+
+```drush @stemtc.prod cim```
+
+**Database update**
+
+If your module udpates or other changes require a database update:
+
+```drush @stemtc.prod dbup```
+
+ ## Be a good citizen
 
 You are working in a team environment and must follow a few rules. If you are careless, it can lead to:
 
