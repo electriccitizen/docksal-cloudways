@@ -42,10 +42,10 @@ REPLACE2="\[SITE\]"
 SITE=$site
 
 REPLACE3="\[URL\]"
-SITE=$url
+URL=$url
 
 REPLACE4="\[DASHBOARD\]"
-SITE=$dashboard
+DASHBOARD=$dashboard
 
 # Copy default README from docs
 cp -fp docs/README.md .
@@ -53,8 +53,8 @@ cp -fp docs/README.md .
 # Replace with new project details and move to project root
 sed "-i" "" "-e" "s/$REPLACE1/$PROJECT/g" "README.md"
 sed "-i" "" "-e" "s/$REPLACE2/$SITE/g" "README.md"
-sed "-i" "" "-e" "s/$REPLACE3/$URL/g" "README.md"
-sed "-i" "" "-e" "s/$REPLACE4/$DASHBOARD/g" "README.md"
+sed "-i" "" "-e" "s#$REPLACE3#$URL#g" "README.md"
+sed "-i" "" "-e" "s#$REPLACE4#$DASHBOARD#g" "README.md"
 mv README.md ../
 
 # Generate the default docs
