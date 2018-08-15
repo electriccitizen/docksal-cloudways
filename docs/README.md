@@ -1,10 +1,9 @@
 # [PROJECT]
 
-[![CircleCI](https://circleci.com/gh/electriccitizen/[SITE].svg?style=shield)](https://circleci.com/gh/electriccitizen/[SITE])
-[![Dashboard [SITE]](https://img.shields.io/badge/dashboard-[SITE]-yellow.svg)](https://dashboard.pantheon.io/sites/9ec12d94-c804-44b7-968e-166a0b49fdc0#dev/code)
-[![Dev Site [SITE]](https://img.shields.io/badge/site-[SITE]-blue.svg)](http://dev-[SITE].pantheonsite.io/)
+Site URL: [URL]
+Dashboard: [DASHBOARD]
 
-[PROJECT] is a Composer-based Drupal 8 application hosted on [Pantheon](http://dashboard.getpantheon.com). Follow this README to create your local environment, and to learn the best practices for effectively contributing to the project.
+[PROJECT] is a Composer-based Drupal 8 application hosted on [Cloudways](https://platform.cloudways.com). Follow this README to create your local environment, and to learn the best practices for effectively contributing to the project.
 
 ## Onboarding
 

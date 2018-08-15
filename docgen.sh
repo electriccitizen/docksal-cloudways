@@ -23,13 +23,28 @@ echo-green "Enter the project name:${NC} (e.g. Graywolf Press)"
 read project
 
 #Set the site name
-echo-green "Enter the site code:${NC} (e.g. graywolf)"
+echo-green "Enter the site code in lowercase:${NC} (e.g. graywolf)"
 read site
+
+#Set the site URL:
+echo-green "Enter the site URL:${NC} (e.g. http://yoursite.org)"
+read url
+
+#Set the dashboard URL:
+echo-green "Enter the dashboard URL:${NC} (e.g. https://platform.cloudways.com/apps/564027/access_detail)"
+read dashboard
+
 
 REPLACE1="\[PROJECT\]"
 PROJECT=$project
 
 REPLACE2="\[SITE\]"
+SITE=$site
+
+REPLACE3="\[URL\]"
+SITE=$site
+
+REPLACE4="\[DASHBOARD\]"
 SITE=$site
 
 # Copy default README from docs
@@ -38,6 +53,8 @@ cp -fp docs/README.md .
 # Replace with new project details and move to project root
 sed "-i" "" "-e" "s/$REPLACE1/$PROJECT/g" "README.md"
 sed "-i" "" "-e" "s/$REPLACE2/$SITE/g" "README.md"
+sed "-i" "" "-e" "s/$REPLACE3/$URL/g" "README.md"
+sed "-i" "" "-e" "s/$REPLACE4/$DASHBOARD/g" "README.md"
 mv README.md ../
 
 # Generate the default docs
