@@ -109,7 +109,7 @@ if [[ ${SKIPDB} = "TRUE" ]]; then
     _sync_config $SKIPCIM
 else
     while (( !all_done )); do
-        options=($PANTHEON_SITE_ENV 'none' 'exit')
+        options=($SITE_ENV 'none' 'exit')
         select opt in "${options[@]}"; do
             case $REPLY in
                 1) _sync_db; exit ;;
