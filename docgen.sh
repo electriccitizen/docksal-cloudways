@@ -42,10 +42,10 @@ REPLACE2="\[SITE\]"
 SITE=$site
 
 REPLACE3="\[URL\]"
-SITE=$site
+SITE=$url
 
 REPLACE4="\[DASHBOARD\]"
-SITE=$site
+SITE=$dashboard
 
 # Copy default README from docs
 cp -fp docs/README.md .
