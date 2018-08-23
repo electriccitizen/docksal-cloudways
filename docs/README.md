@@ -8,11 +8,17 @@ Dashboard: [DASHBOARD]
 
 ## Onboarding
 
-You'll need to make sure that you are on the Cloudways team and that you have added your public key to your account in order to SSH into the server. In the steps below, replace <youraccount>@ with your Cloudways username. For example, if your account name is "adam" then <youraccount>@178.128.150.228 becomes:
+You'll need to make sure that you are on the Cloudways team and that you have added your public key to your account in order to SSH into the server. In the steps below, replace <youraccount>@ with your Cloudways username. For example, if your account name is ```adam``` then ```<youraccount>@178.128.150.228``` becomes:
 
 ```
 ssh adam@178.128.150.228
 ```
+
+Please remember: any time you commit to MASTER branch your code is automatically pushed directly to production. There is no “staging” server (at least for now). And then after that, you may need to manually login and run composer install if your changes require it. And of course you’ll need to run drush cim/drush updb/drush cr manually as needed, as none of this is automated.
+
+This means there is no real way to get client approval on changes, short of screenshots on your local, and that you’ll need to be extra cautious about what you push up — it is what is, and the client seems to understand the risk/drawbacks in order to pay $20/mo instead of $125. Someday we will try to set up a proper staging server, but my first attempts were a mess and very difficult to push code between them.
+
+If we ever DO have a change that needs to be reviewed by client or is too big we do have the capability of spinning up on-demand clones. You can also push your local branch and have it manually pulled and reviewed by a team member locally prior to merging into master, if necessary.
 
 See the [setup documentation](docs/SETUP.md) if you are installing VirtualBox, Docksal, or Terminus for the first time. Once you meet the requirements, clone the this repository into your Docksal projects directory and initialize the site:
 
