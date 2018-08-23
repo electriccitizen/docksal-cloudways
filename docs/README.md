@@ -8,7 +8,7 @@ Dashboard: [DASHBOARD]
 
 ## Onboarding
 
-You'll need to make sure that you are on the Cloudways team and that you have added your public key to your account in order to SSH into the server. In the steps below, replace <youraccount>@ with your Cloudways username. For example, if your account name is ```adam``` then ```<youraccount>@178.128.150.228``` becomes:
+You'll need to make sure that you are on the Cloudways team and that you have added your public key to your account in order to SSH into the server. In the steps below, replace ```<youraccount>``` with your Cloudways username. For example, if your account name is ```adam``` then ```<youraccount>@178.128.150.228``` becomes:
 
 ```
 ssh adam@178.128.150.228
