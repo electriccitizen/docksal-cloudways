@@ -1,11 +1,18 @@
 # [PROJECT]
 
 Site URL: [URL]
+
 Dashboard: [DASHBOARD]
 
 [PROJECT] is a Composer-based Drupal 8 application hosted on [Cloudways](https://platform.cloudways.com). Follow this README to create your local environment, and to learn the best practices for effectively contributing to the project.
 
 ## Onboarding
+
+You'll need to make sure that you are on the Cloudways team and that you have added your public key to your account in order to SSH into the server. In the steps below, replace <youraccount>@ with your Cloudways username. For example, if your account name is "adam" then <youraccount>@178.128.150.228 becomes:
+
+```
+ssh adam@178.128.150.228
+```
 
 See the [setup documentation](docs/SETUP.md) if you are installing VirtualBox, Docksal, or Terminus for the first time. Once you meet the requirements, clone the this repository into your Docksal projects directory and initialize the site:
 
@@ -27,7 +34,7 @@ Once the site is up, you are ready to start working:
 * Dev: http://dev-[SITE].pantheonsite.io
 * User: admin/admin (local)
 
-You typically only run [fin init](docs/commands/INIT.md) on your first-time setup, but can use it any time you want to reset or guarantee that your local environment is in a safe one-to-one state with your upstream environment. 
+You typically only run [fin init](docs/commands/INIT.md) on your first-time setup, but can use it any time you want to reset or guarantee that your local environment is in a safe one-to-one state with your upstream environment.
 
 Here are some other helpful ```fin``` commands that you will likely use in your day-to-day work:
 
@@ -35,7 +42,7 @@ Here are some other helpful ```fin``` commands that you will likely use in your 
 
 ```fin stop``` to stop your project services (recommended)
 
-See (working with Docksal)[docs/local/DOCKSAL.md] for additional Docksal commands and tips. 
+See (working with Docksal)[docs/local/DOCKSAL.md] for additional Docksal commands and tips.
 
 See [troubleshooting Docksal](docs/local/TROUBLESHOOT.md) if things go bad.
 
@@ -44,17 +51,17 @@ See [troubleshooting Docksal](docs/local/TROUBLESHOOT.md) if things go bad.
 
 Here is a safe workflow that will help prevent lost work and other problems.
 
-```fin sync``` [(?)](docs/commands/SYNC.md) to ensure your local site is synced with the upstream environment before starting a new task 
+```fin sync``` [(?)](docs/commands/SYNC.md) to ensure your local site is synced with the upstream environment before starting a new task
 
 ```git checkout -b <your-feature-branch>``` to checkout a new feature branch and do your thing
 
 ```fin drush cex``` to export your changes
 
-```git add``` to add any new configuration, theme, or custom module files 
+```git add``` to add any new configuration, theme, or custom module files
 
 ```git commit``` to commit your changes and get your feature branch into a safe, recoverable state
 
-```fin validate``` [(?)](docs/commands/VALIDATE.md)  to pull in changes from other team members and check your work against the upstream
+```fin validate``` [(?)](docs/commands/VALIDATE.md)  to pull in changes from other team members (master) and to check your work against the upstream
 
 ```git push origin <your-feature-branch>``` to push your feature branch to Github if everything looks good
 
@@ -64,21 +71,29 @@ If you see errors or merge conflicts after running [fin sync](docs/commands/SYNC
 
 When your work is ready and has passed any necessary QA. submit a Github pull request against your branch. A project maintainer will review the changes and merge into master.
 
-**Important:** Any time a Github push occurs to the ```master``` branch (via a git push or a pull request), the code will be AUTOMATICALLY deployed to Cloudways. Once it is on Cloudways you will need to complete the additional steps below depending on the nature of your work. 
+**Important:** Any time a Github push occurs to the ```master``` branch (via a git push or a pull request), the code will be AUTOMATICALLY deployed to the production Cloudways server. Once it is on Cloudways you will need to complete the additional steps below depending on the nature of your work.
 
 *Note: Advanced or otherwise approved users can submit and merge their own PRs, and/or merge and push a feature branch directly into master without a formal pull request. Ask if you have questions, err on the side of caution.*
 
-## Post push 
+## Take a backup
 
-After you push to ```master``` branch and your code is on Cloudways you will need to do several additional steps:
+If there is any risk your changes might break something it is wise to take an on-demand backup prior to pushing your changes to master. Login to Cloudways and:
+
+```Servers > Stemtc > Backups > Take backup now```
+
+## Post push
+
+After you push to ```master``` branch and your code is on Cloudways, you may need to do several additional steps:
 
 **Composer install**
 
 If your changes included module updates, additions, or removals you will need to manually run ```composer install``` on the Cloudways server via SSH:
 
-```ssh stemtc@178.128.150.228```
+```ssh <youraccount>@178.128.150.228```
 
 ```composer install```
+
+```exit```
 
 **Config import**
 
@@ -91,6 +106,10 @@ If your changes require a config import:
 If your module udpates or other changes require a database update:
 
 ```drush @stemtc.prod dbup```
+
+If you need a cache clear:
+
+```drush @stemtc.prod cr```
 
  ## Be a good citizen
 
@@ -107,7 +126,7 @@ See this guide to [following a safe workflow](docs/workflow/WORKFLOW.md) when us
 
 These documents contain other important information about the project and working with your local environment.
 
-* [Available commands](docs/commands/COMMANDS.md) 
+* [Available commands](docs/commands/COMMANDS.md)
 * [Following a safe workflow](docs/workflow/WORKFLOW.md)
 * [Frontend and theming documentatiob](docs/frontend/THEME.md)
 * [Project notes](docs/custom/NOTES.md)
